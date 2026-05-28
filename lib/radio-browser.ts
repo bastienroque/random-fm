@@ -1,0 +1,58 @@
+import type { FilterState } from "@/types/filter";
+import type { Station } from "@/types/station";
+
+// radio-browser.info provides multiple mirrors — this is the recommended entry point
+const API_BASE = "https://de1.api.radio-browser.info/json";
+
+function buildParams(filters: FilterState): URLSearchParams {
+  const params = new URLSearchParams({
+    limit: "10",
+    order: "random",
+    hidebroken: "true",
+    has_geo_info: "false",
+  });
+
+  if (filters.genres[0] !== "Any") {
+    // API accepts a comma-separated tag list — all tags must match
+    params.set("tag", filters.genres.join(",").toLowerCase());
+  }
+
+  if (filters.language !== "Any") {
+    params.set("language", filters.language.toLowerCase());
+  }
+
+  if (filters.country !== "Any") {
+    // API uses ISO 3166-1 country names (full name, not code)
+    const countryMap: Record<string, string> = {
+      US: "United States",
+      UK: "United Kingdom",
+      France: "France",
+      Japan: "Japan",
+      Brazil: "Brazil",
+      Germany: "Germany",
+      Spain: "Spain",
+      Italy: "Italy",
+    };
+    params.set("country", countryMap[filters.country] ?? filters.country);
+  }
+
+  return params;
+}
+
+export async function fetchRandomStation(
+  filters: FilterState,
+): Promise<Station | null> {
+  const params = buildParams(filters);
+  const res = await fetch(`${API_BASE}/stations/search?${params.toString()}`, {
+    headers: { "User-Agent": "RadioApp/1.0" },
+    next: { revalidate: 0 }, // always fresh
+  });
+
+  if (!res.ok) throw new Error(`radio-browser API error: ${res.status}`);
+
+  const stations: Station[] = await res.json();
+  if (stations.length === 0) return null;
+
+  // Pick a random one from the returned batch
+  return stations[Math.floor(Math.random() * stations.length)];
+}
