@@ -1,7 +1,7 @@
 # 🎧 RandomFM
 
 A modern, minimal radio streaming app built with **Next.js**, **TypeScript**, **Tailwind CSS**, and the **Radio Browser API**.
-It lets you explore and stream live radio stations from around the world with a clean, responsive interface.
+It lets you stream and like live radio stations from around the world with a clean, responsive interface.
 
 Available at: https://random-fm-app.vercel.app/
 
@@ -15,7 +15,9 @@ Available at: https://random-fm-app.vercel.app/
 * 🔊 Volume control with quick mute / max interactions
 * 🏷️ Station metadata (country, language, bitrate, tags)
 * 📱 Fully responsive UI
-* ⚡ Fast performance with Next.js App Router
+* 👤 SignUp and SignIn to an account
+* ❤️ Save and like any station
+* 🔒 Protected routes for your privacy
 
 ---
 
@@ -26,6 +28,9 @@ Available at: https://random-fm-app.vercel.app/
 * **React Hooks**
 * **Tailwind CSS**
 * **Lucide Icons**
+* **Clerk**
+* **Neon**
+* **Prisma**
 * **Radio Browser API**
 
 ---
@@ -97,7 +102,8 @@ The player is fully responsive with:
 
 ## 🧠 Future Ideas
 
-* Favorites / liked stations ❤️
+* ~~Favorites / liked stations~~ ❤️
+* ~~Register / Login~~
 * Recently played history
 * Search + filtering improvements
 * Sleep timer ⏲️
