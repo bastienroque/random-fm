@@ -56,3 +56,19 @@ export async function fetchRandomStation(
   // Pick a random one from the returned batch
   return stations[Math.floor(Math.random() * stations.length)];
 }
+
+export async function fetchStationByUuid(
+  stationuuid: string,
+): Promise<Station | null> {
+  try {
+    const res = await fetch(`${API_BASE}/stations/byuuid/${stationuuid}`, {
+      headers: { "User-Agent": "random-fm/1.0" },
+      next: { revalidate: 0 },
+    });
+    const data = await res.json();
+    return data[0] ?? null;
+  } catch (error) {
+    console.error("Error fetching station by UUID:", error);
+    return null;
+  }
+}

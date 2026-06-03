@@ -22,7 +22,7 @@ export function FilterPill({
       disabled={disabled}
       aria-pressed={active}
       className={cn(
-        "rounded-full border px-3.5 py-1.5 text-sm transition-all duration-150 select-none",
+        "rounded-md border px-3.5 py-1.5 text-sm transition-all duration-150 select-none",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         active
           ? "border-foreground bg-foreground text-background"

@@ -69,8 +69,14 @@ interface FilterContextValue {
   setCountry: (country: Country) => void;
   reset: () => void;
   isActive: boolean;
+  isBuffering: boolean;
+  isPlaying: boolean;
+  streamError: boolean;
   station: Station | null;
   setStation: (station: Station | null) => void;
+  setIsPlaying: (value: boolean) => void;
+  setIsBuffering: (value: boolean) => void;
+  setStreamError: (value: boolean) => void;
 }
 
 const FilterContext = createContext<FilterContextValue | null>(null);
@@ -78,6 +84,9 @@ const FilterContext = createContext<FilterContextValue | null>(null);
 export function FilterProvider({ children }: { children: ReactNode }) {
   const [filters, dispatch] = useReducer(filterReducer, DEFAULT_STATE);
   const [station, setStation] = useState<Station | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isBuffering, setIsBuffering] = useState(false);
+  const [streamError, setStreamError] = useState(false);
 
   const toggleGenre = useCallback(
     (genre: Genre) => dispatch({ type: "TOGGLE_GENRE", payload: genre }),
@@ -110,6 +119,12 @@ export function FilterProvider({ children }: { children: ReactNode }) {
         isActive,
         station,
         setStation,
+        isPlaying,
+        isBuffering,
+        streamError,
+        setStreamError,
+        setIsBuffering,
+        setIsPlaying,
       }}
     >
       {children}

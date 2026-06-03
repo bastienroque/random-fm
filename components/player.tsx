@@ -10,18 +10,25 @@ import {
   ChevronDown,
   ChevronUp,
   Loader2,
-  Heart,
 } from "lucide-react";
 import { fetchRandomStation } from "@/lib/radio-browser";
 import { useFilters } from "@/context/FilterContext";
+import { LikeStationButton } from "./like-station-button";
 
 const Player = () => {
-  const { station, setStation, filters: activeFilters } = useFilters();
+  const {
+    station,
+    setStation,
+    filters: activeFilters,
+    isPlaying,
+    isBuffering,
+    streamError,
+    setStreamError,
+    setIsBuffering,
+    setIsPlaying,
+  } = useFilters();
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isBuffering, setIsBuffering] = useState(false);
   const [isShuffling, setIsShuffling] = useState(false);
-  const [streamError, setStreamError] = useState(false);
   const [volume, setVolume] = useState(50);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -104,9 +111,9 @@ const Player = () => {
             {/* live indicator */}
             <span className="relative flex h-1.5 w-1.5 shrink-0">
               <span
-                className={`absolute inline-flex h-full w-full rounded-full bg-[#00ff87] opacity-60 ${isPlaying ? "animate-ping" : ""}`}
+                className={`absolute inline-flex h-full w-full rounded-md bg-[#00ff87] opacity-60 ${isPlaying ? "animate-ping" : ""}`}
               />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#00ff87]" />
+              <span className="relative inline-flex rounded-md h-1.5 w-1.5 bg-[#00ff87]" />
             </span>
 
             <span className="tracking-widest text-[#00ff87] font-medium shrink-0">
@@ -200,14 +207,17 @@ const Player = () => {
                     aria-label={isPlaying ? "Pause" : "Play"}
                     onClick={togglePlay}
                     disabled={streamError}
-                    className="w-10 h-10 rounded-full border border-[#222] text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="w-10 h-10 rounded-md border border-[#222] text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     {isBuffering ? (
-                      <Loader2 size={16} className="animate-spin" />
+                      <Loader2
+                        size={16}
+                        className="rounded-full animate-spin"
+                      />
                     ) : isPlaying ? (
-                      <Pause size={18} />
+                      <Pause size={16} />
                     ) : (
-                      <Play size={18} />
+                      <Play size={16} />
                     )}
                   </button>
 
@@ -215,7 +225,7 @@ const Player = () => {
                     aria-label="Randomise station"
                     onClick={handleRandomise}
                     disabled={isShuffling}
-                    className="w-10 h-10 rounded-full border border-[#222] text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="w-10 h-10 rounded-md border border-[#222] text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     {isShuffling ? (
                       <Loader2 size={14} className="animate-spin" />
@@ -223,6 +233,8 @@ const Player = () => {
                       <Shuffle size={15} />
                     )}
                   </button>
+
+                  <LikeStationButton station={station} />
 
                   <div className="flex items-center gap-3 w-full sm:w-1/3 md:w-1/4 min-w-0">
                     <button

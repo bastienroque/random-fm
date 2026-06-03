@@ -1,6 +1,7 @@
 import { FiltersSection } from "@/components/filters";
 import { RandomiseButton } from "@/components/randomise-button";
 import { currentUser } from "@clerk/nextjs/server";
+import Link from "next/link";
 
 const HomePage = async () => {
   const user = await currentUser();
@@ -21,16 +22,6 @@ const HomePage = async () => {
       </div>
       <FiltersSection />
       <RandomiseButton />
-      <p className="text-muted">
-        Made possible with{" "}
-        <a
-          href="https://www.radio-browser.info/"
-          target="_blank"
-          className="font-semibold hover:text-white"
-        >
-          Radio Browser API
-        </a>
-      </p>
     </div>
   );
 };
