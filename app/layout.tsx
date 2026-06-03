@@ -1,18 +1,12 @@
 import type { Metadata } from "next";
-import {
-  ClerkProvider,
-  Show,
-  SignOutButton,
-  SignUpButton,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
+
 import "./globals.css";
-import Logo from "next/image";
-import Player from "@/components/player";
 import { FilterProvider } from "@/context/FilterContext";
-import Link from "next/link";
-import { LikedStationsLink } from "@/components/liked-stations-link";
+import { FavoritesProvider } from "@/context/FavoritesContext";
+import Player from "@/components/player";
+import Navbar from "@/components/navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,49 +36,17 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ClerkProvider>
-          <FilterProvider>
-            <header className="flex border-b border-border">
-              <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4">
-                <Link
-                  href="/"
-                  className="flex items-center gap-4 text-xl text-foreground font-bold tracking-wide"
-                >
-                  <Logo
-                    src="/random-fm-logo.svg"
-                    alt="RandomFM-Logo"
-                    width={25}
-                    height={25}
-                    className="h-6 w-auto"
-                  />
-                  RandomFM
-                </Link>
-                <div className="flex items-center justify-between gap-4">
-                  <Link href="/about" className="text-white">
-                    About
-                  </Link>
-                  <LikedStationsLink />
-                  <Show when="signed-out">
-                    <SignUpButton mode="modal">
-                      <button className="bg-foreground text-background rounded-full font-medium text-sm sm:text-base h-10 px-8 cursor-pointer">
-                        Sign Up
-                      </button>
-                    </SignUpButton>
-                  </Show>
-                  <Show when="signed-in">
-                    <SignOutButton>
-                      <button className="bg-foreground text-background rounded-full font-medium text-sm sm:text-base h-10 px-8 cursor-pointer">
-                        Sign Out
-                      </button>
-                    </SignOutButton>
-                  </Show>
-                </div>
-              </div>
-            </header>
-            <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-8">
-              {children}
-            </main>
-            <Player />
-          </FilterProvider>
+          <FavoritesProvider>
+            <FilterProvider>
+              <header className="flex border-b border-border">
+                <Navbar />
+              </header>
+              <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-8">
+                {children}
+              </main>
+              <Player />
+            </FilterProvider>
+          </FavoritesProvider>
         </ClerkProvider>
       </body>
     </html>

@@ -5,14 +5,12 @@ export function LikedStationsLink() {
   return (
     <>
       <Show when="signed-in">
-        <Link href="/liked-stations" className="text-white">
-          Liked Stations
-        </Link>
+        <Link href="/my-stations">My Stations</Link>
       </Show>
 
       <Show when="signed-out">
         <SignInButton mode="modal">
-          <button className="text-white cursor-pointer">Liked Stations</button>
+          <button className="cursor-pointer">My Stations</button>
         </SignInButton>
       </Show>
     </>
