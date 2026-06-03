@@ -1,13 +1,18 @@
 import { FiltersSection } from "@/components/filters";
 import { RandomiseButton } from "@/components/randomise-button";
-import { Link } from "lucide-react";
+import { currentUser } from "@clerk/nextjs/server";
 
-const HomePage = () => {
+const HomePage = async () => {
+  const user = await currentUser();
+  const username = user?.username;
+
+  const welcomeSuffix = username ? `${username} 👋` : "to RandomFM";
+
   return (
     <div className="flex flex-col gap-8 items-start pb-24">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-          Welcome to RandomFM
+          Welcome {welcomeSuffix}
         </h1>
         <p className="text-muted">
           You can simply find a random station or use the available filters to
@@ -17,7 +22,7 @@ const HomePage = () => {
       <FiltersSection />
       <RandomiseButton />
       <p className="text-muted">
-        Made possible by{" "}
+        Made possible with{" "}
         <a
           href="https://www.radio-browser.info/"
           target="_blank"
