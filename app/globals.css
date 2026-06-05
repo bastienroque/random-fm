@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --color-background: #0b1120;
@@ -39,7 +39,7 @@
   }
 }
 
-input[type="range"] {
+/* input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   height: 2px;
@@ -64,4 +64,4 @@ input[type="range"]::-moz-range-thumb {
   background: #00ff87;
   cursor: pointer;
   border: none;
-}
+} */
