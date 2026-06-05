@@ -27,7 +27,7 @@ const LikedStationItem = ({ favorite }: Props) => {
         {favorite.favicon ? (
           <img
             src={favorite.favicon}
-            alt={favorite.name}
+            alt={favorite.name ? "favorite.name" : "Radio station logo"}
             className="w-16 h-16 object-contain"
             onError={(e) => (e.currentTarget.style.display = "none")}
           />

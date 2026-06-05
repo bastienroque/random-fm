@@ -38,6 +38,17 @@ const Changelog = () => {
 - Update About page content`}
         </p>
       </div>
+      <div>
+        <h3 className="font-mono">v2.1.2</h3>
+        <span className="font-semibold">More Fixes and Updates</span>
+        <p className="whitespace-pre-line">
+          {`- Update security standards
+          - Fix semantic HTML tags
+- Update navbar styling
+- Update player UI
+- Add Aria-labels`}
+        </p>
+      </div>
     </div>
   );
 };

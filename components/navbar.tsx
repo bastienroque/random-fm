@@ -20,8 +20,10 @@ export default function Navbar() {
     <nav className="w-full p-2">
       <div className="h-16 mx-auto flex w-full max-w-6xl justify-between px-4 rounded-md dark:bg-background bg-foreground dark:text-foreground text-background">
         <Link
+          aria-label="home page"
           href="/"
           className="flex items-center gap-4 text-xl font-bold tracking-wide"
+          onClick={() => setOpen(false)}
         >
           <Logo className="h-6 w-auto invert dark:invert-0" />
           <div className="relative">
@@ -37,6 +39,7 @@ export default function Navbar() {
               <Link
                 key={l.href}
                 href={l.href}
+                aria-label={`${l.href} page`}
                 className="flex items-center h-10 px-4 rounded-md hover:bg-muted/10"
               >
                 {l.label}
@@ -47,19 +50,28 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-2">
             <Show when="signed-out">
               <SignInButton mode="modal">
-                <button className="rounded-md dark:bg-foreground bg-background dark:text-background text-foreground h-10 px-8 cursor-pointer hover:opacity-70">
+                <button
+                  aria-label="Sign in button"
+                  className="rounded-md dark:bg-foreground bg-background dark:text-background text-foreground h-10 px-8 cursor-pointer hover:opacity-70"
+                >
                   Sign In
                 </button>
               </SignInButton>
               <SignUpButton mode="modal">
-                <button className="border rounded-md h-10 px-8 cursor-pointer hover:opacity-70">
+                <button
+                  aria-label="Sign up button"
+                  className="border rounded-md h-10 px-8 cursor-pointer hover:opacity-70"
+                >
                   Sign Up
                 </button>
               </SignUpButton>
             </Show>
             <Show when="signed-in">
               <SignOutButton>
-                <button className="border rounded-md h-10 px-8 cursor-pointer hover:opacity-70">
+                <button
+                  aria-label="Sign out button"
+                  className="border rounded-md h-10 px-8 cursor-pointer hover:opacity-70"
+                >
                   Sign Out
                 </button>
               </SignOutButton>
@@ -109,6 +121,7 @@ export default function Navbar() {
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
+                aria-label={`${l.href} page`}
                 className="flex items-center h-10 rounded-md hover:bg-muted/10"
               >
                 {l.label}
@@ -117,26 +130,37 @@ export default function Navbar() {
             <LikedStationsLink />
           </div>
           <div className="my-2 h-px " />
-          <div className="flex gap-2">
-            <Show when="signed-out">
-              <SignInButton mode="modal">
-                <button className="rounded-md dark:bg-foreground bg-background dark:text-background text-foreground font-medium text-sm sm:text-base h-10 px-4 cursor-pointer hover:opacity-70">
-                  Sign In
-                </button>
-              </SignInButton>
-              <SignUpButton mode="modal">
-                <button className="border rounded-md font-medium text-sm sm:text-base h-10 px-4 cursor-pointer hover:opacity-70">
-                  Sign Up
-                </button>
-              </SignUpButton>
-            </Show>
-            <Show when="signed-in">
-              <SignOutButton>
-                <button className="rounded-md dark:bg-foreground bg-background dark:text-background text-foreground font-medium text-sm sm:text-base h-10 px-4 cursor-pointer hover:opacity-70">
-                  Sign Out
-                </button>
-              </SignOutButton>
-            </Show>
+          <div className="mx-auto w-full flex justify-between ">
+            <div className="flex gap-2">
+              <Show when="signed-out">
+                <SignInButton mode="modal">
+                  <button
+                    aria-label="Sign in button"
+                    className="rounded-md dark:bg-foreground bg-background dark:text-background text-foreground font-medium text-sm sm:text-base h-10 px-4 cursor-pointer hover:opacity-70"
+                  >
+                    Sign In
+                  </button>
+                </SignInButton>
+                <SignUpButton mode="modal">
+                  <button
+                    aria-label="Sign up button"
+                    className="border rounded-md font-medium text-sm sm:text-base h-10 px-4 cursor-pointer hover:opacity-70"
+                  >
+                    Sign Up
+                  </button>
+                </SignUpButton>
+              </Show>
+              <Show when="signed-in">
+                <SignOutButton>
+                  <button
+                    aria-label="Sign out button"
+                    className="rounded-md dark:bg-foreground bg-background dark:text-background text-foreground font-medium text-sm sm:text-base h-10 px-4 cursor-pointer hover:opacity-70"
+                  >
+                    Sign Out
+                  </button>
+                </SignOutButton>
+              </Show>
+            </div>
             <ThemeToggle />
           </div>
         </div>

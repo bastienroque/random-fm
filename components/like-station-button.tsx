@@ -32,7 +32,7 @@ export function LikeStationButton({ station }: Props) {
         <button
           aria-label="Randomise station"
           onClick={handleFavorite}
-          className="w-10 h-10 rounded-md border border-[#222] text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="w-10 h-10 rounded-md border border-muted text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {favorited ? (
             <HeartMinus
@@ -48,9 +48,9 @@ export function LikeStationButton({ station }: Props) {
       <Show when="signed-out">
         <SignInButton mode="modal">
           <button
-            aria-label="Randomise station"
+            aria-label="Like station"
             onClick={handleFavorite}
-            className="w-10 h-10 rounded-md border border-[#222] text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="w-10 h-10 rounded-md border border-muted text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <HeartPlus size={16} />
           </button>
