@@ -12,10 +12,10 @@ const HomePage = async () => {
   return (
     <div className="flex flex-col gap-8 items-start pb-24">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground">
+        <h1 className="text-2xl font-semibold tracking-tight ">
           Welcome {welcomeSuffix}
         </h1>
-        <p className="text-muted">
+        <p>
           You can simply find a random station or use the available filters to
           enhance your search.
         </p>

@@ -101,37 +101,32 @@ const Player = () => {
         }}
       />
 
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t border-[#1c1c1c]">
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-background dark:bg-foreground border-t border-[#1c1c1c]">
         <div className="mx-auto w-full max-w-6xl px-3 sm:px-4">
           {/* collapsed bar */}
           <div
             className="flex items-center gap-2 sm:gap-4 min-h-14 py-2 cursor-pointer select-none"
             onClick={() => setIsExpanded(!isExpanded)}
           >
-            {/* live indicator */}
             <span className="relative flex h-1.5 w-1.5 shrink-0">
               <span
-                className={`absolute inline-flex h-full w-full rounded-md bg-[#00ff87] opacity-60 ${isPlaying ? "animate-ping" : ""}`}
+                className={`absolute inline-flex h-full w-full rounded-md dark:bg-background bg-foreground opacity-60 ${isPlaying ? "animate-ping" : ""}`}
               />
-              <span className="relative inline-flex rounded-md h-1.5 w-1.5 bg-[#00ff87]" />
+              <span className="relative inline-flex rounded-md h-1.5 w-1.5 dark:bg-background bg-foreground" />
             </span>
 
-            <span className="tracking-widest text-[#00ff87] font-medium shrink-0">
+            <span className="tracking-widest dark:text-background text-foreground font-medium shrink-0">
               live
             </span>
-
             <div className="w-px h-4 shrink-0 bg-muted" />
-
             <span className="tracking-wider text-muted truncate max-w-30 sm:max-w-none">
               {station.name}
             </span>
-
-            <span className="hidden sm:block text-[#e0e0e0] flex-1 truncate font-mono">
+            <span className="hidden sm:block text-muted flex-1 truncate font-mono">
               {station.country}
               {station.language ? ` · ${station.language}` : ""}
               {station.bitrate > 0 ? ` · ${station.bitrate} kbps` : ""}
             </span>
-
             <button
               aria-label={isExpanded ? "Collapse player" : "Expand player"}
               className="text-muted hover:text-[#666] transition-colors ml-auto shrink-0"
@@ -144,9 +139,7 @@ const Player = () => {
             </button>
           </div>
         </div>
-
         <div className="border-t border-[#161616]" />
-
         <div className="mx-auto w-full max-w-6xl px-3 sm:px-4">
           {/* expanded panel */}
           <div
@@ -167,10 +160,7 @@ const Player = () => {
                   <span className="text-3xl">📻</span>
                 )}
               </div>
-
-              {/* info + controls */}
               <div className="flex flex-col gap-3 flex-1 min-w-0">
-                {/* station info */}
                 <div>
                   <p className="tracking-widest text-muted mb-0.5">
                     {station.name}
@@ -181,7 +171,7 @@ const Player = () => {
                           href={station.homepage}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="font-semibold hover:text-white transition-colors"
+                          className="font-semibold hover:text-foreground dark:hover:text-background transition-colors"
                           onClick={(e) => e.stopPropagation()}
                         >
                           website ↗
@@ -200,8 +190,6 @@ const Player = () => {
                     </p>
                   )}
                 </div>
-
-                {/* controls row */}
                 <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full">
                   <button
                     aria-label={isPlaying ? "Pause" : "Play"}
@@ -220,7 +208,6 @@ const Player = () => {
                       <Play size={16} />
                     )}
                   </button>
-
                   <button
                     aria-label="Randomise station"
                     onClick={handleRandomise}
@@ -233,9 +220,7 @@ const Player = () => {
                       <Shuffle size={15} />
                     )}
                   </button>
-
                   <LikeStationButton station={station} />
-
                   <div className="flex items-center gap-3 w-full sm:w-1/3 md:w-1/4 min-w-0">
                     <button
                       type="button"
@@ -243,31 +228,40 @@ const Player = () => {
                         setVolume(0);
                         if (audioRef.current) audioRef.current.volume = 0;
                       }}
-                      className="text-muted hover:text-white transition-colors shrink-0"
+                      className="text-muted hover:text-white dark:hover:text-black transition-colors shrink-0"
                       aria-label="Mute volume"
                     >
                       <Volume1 size={14} />
                     </button>
-                    <input
-                      type="range"
-                      min={0}
-                      max={100}
-                      step={1}
-                      value={volume}
-                      onChange={handleVolume}
-                      aria-label="Volume"
-                      className="flex-1 cursor-pointer"
-                      style={{
-                        background: `linear-gradient(to right, #00ff87 ${volume}%, #1e1e1e ${volume}%)`,
-                      }}
-                    />
+                    <div className="relative flex-1 flex items-center group">
+                      <input
+                        type="range"
+                        min={0}
+                        max={100}
+                        step={1}
+                        value={volume}
+                        onChange={handleVolume}
+                        aria-label="Volume"
+                        className="absolute inset-0 w-full opacity-0 cursor-pointer z-10 h-full"
+                      />
+                      <div className="w-full h-1 rounded-full bg-muted overflow-visible relative">
+                        <div
+                          className="h-full rounded-full bg-foreground dark:bg-background"
+                          style={{ width: `${volume}%` }}
+                        />
+                        <div
+                          className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-foreground dark:bg-background shadow"
+                          style={{ left: `${volume}%` }}
+                        />
+                      </div>
+                    </div>
                     <button
                       type="button"
                       onClick={() => {
                         setVolume(100);
                         if (audioRef.current) audioRef.current.volume = 1;
                       }}
-                      className="text-muted hover:text-white transition-colors shrink-0"
+                      className="text-muted hover:text-white dark:hover:text-black transition-colors shrink-0"
                       aria-label="Max volume"
                     >
                       <Volume2 size={14} />

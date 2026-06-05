@@ -23,7 +23,7 @@ const LikedStationItem = ({ favorite }: Props) => {
 
   return (
     <div className="flex gap-4 p-4 md:p-8 rounded-md border border-[#222]">
-      <div className="w-18 h-18 p-1 sm:w-32 sm:h-32 rounded-md bg-background border border-[#222] flex items-center justify-center shrink-0">
+      <div className="w-18 h-18 p-1 sm:w-32 sm:h-32 rounded-md bg-foreground border dark:bg-background border-[#222] flex items-center justify-center shrink-0">
         {favorite.favicon ? (
           <img
             src={favorite.favicon}

@@ -33,11 +33,11 @@ export function RandomiseButton() {
         type="button"
         onClick={handleClick}
         disabled={loading}
-        className="flex w-full items-center justify-center gap-2 rounded-md bg-foreground px-4 py-3.5 text-sm font-medium text-background transition-opacity hover:opacity-80 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+        className="flex w-full items-center justify-center gap-2 rounded-md bg-foreground text-background dark:bg-background dark:text-foreground px-4 py-3.5 text-sm font-medium transition-opacity hover:opacity-80 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
       >
         {loading ? (
           <>
-            <span className="h-4 w-4 animate-spin rounded-full border-2 border-background/30 border-t-background" />
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-background/30 border-t-background dark:border-t-foreground" />
             Tuning in…
           </>
         ) : (

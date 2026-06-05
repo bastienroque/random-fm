@@ -2,35 +2,31 @@ import Link from "next/link";
 
 const About = () => {
   return (
-    <div className="flex flex-col gap-12 items-start pb-24">
+    <div className="flex flex-col gap-12 max-w-3xl items-start pb-24">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-foreground">
+        <h1 className="text-2xl font-semibold tracking-tight">
           About RandomFM
         </h1>
+        <p className="whitespace-pre-line">
+          {`This is a radio discovery app built around one idea: sometimes the best thing to listen to is something you'd never choose yourself.
+        Tune into stations from across the world, filtered loosely by genre, language, or country — or leave everything open and let chance decide.`}
+        </p>
       </div>
-      <p className="text-muted">
-        <span className="text-foreground font-mono text-sm">v1.0.0 </span>
-        <br></br>A modern, minimal radio streaming app built with Next.js,
-        TypeScript, Tailwind CSS, and the Radio Browser API. It lets you explore
-        and stream live radio stations from around the world with a clean,
-        responsive interface.
-      </p>
-      <p className="text-muted">
-        <span className="text-foreground font-mono text-sm">v2.0.0 </span>
-        <br></br>You can now register and create an account to save and like
-        your favorite stations directly inside the app. Built with Clerk, Neon,
-        and Prisma.
-      </p>
       <div>
-        <p className="text-muted">Including features such as:</p>
-        <ul>
-          <li>Search a random station</li>
-          <li>Apply given filters</li>
-          <li>Access radio's website</li>
-          <li>Save and like any station</li>
-          <li>Register an account</li>
-          <li>Protected routes</li>
-        </ul>
+        <h1 className="text-2xl font-semibold tracking-tight">How it works </h1>
+        <p className="whitespace-pre-line">
+          {`Pick up to three filters — or none at all.
+          Hit Tune In, a random station from Radio Browser's global database starts playing.
+          Not what you wanted? Hit it again.
+          Found something worth keeping? Create an account and save it to your collection.`}
+        </p>
+      </div>
+      <div>
+        <h1 className="text-2xl font-semibold tracking-tight">Built with </h1>
+        <p className="whitespace-pre-line">
+          {`RandomFM was built as a full-stack portfolio project using Next.js 15, React, TypeScript, Tailwind CSS, Neon (serverless Postgres), Prisma, and Clerk for authentication.
+          Station data is sourced entirely from the Radio Browser open API — a community-maintained, free database of radio stations from every corner of the planet.`}
+        </p>
       </div>
 
       <footer>
@@ -39,7 +35,7 @@ const About = () => {
           <Link
             href="https://www.radio-browser.info/"
             target="_blank"
-            className="font-semibold hover:text-white"
+            className="font-semibold hover:text-white dark:hover:text-background"
           >
             Radio Browser API
           </Link>
@@ -49,7 +45,7 @@ const About = () => {
           <Link
             href="https://github.com/bastienroque"
             target="_blank"
-            className="font-semibold hover:text-white"
+            className="font-semibold hover:text-white dark:hover:text-background"
           >
             Bastien Roque
           </Link>

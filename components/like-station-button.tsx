@@ -35,7 +35,10 @@ export function LikeStationButton({ station }: Props) {
           className="w-10 h-10 rounded-md border border-[#222] text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {favorited ? (
-            <HeartMinus size={16} className="text-white hover:text-[#ccc] " />
+            <HeartMinus
+              size={16}
+              className="text-white dark:text-black hover:text-[#ccc] "
+            />
           ) : (
             <HeartPlus size={16} />
           )}
