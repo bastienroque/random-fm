@@ -100,13 +100,13 @@ const Player = () => {
           setIsPlaying(false);
         }}
       />
-
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-background dark:bg-foreground border-t border-[#1c1c1c]">
+      <div className="fixed bottom-2 left-2 right-2 z-50 bg-background dark:bg-foreground border-t border rounded-md">
         <div className="mx-auto w-full max-w-6xl px-3 sm:px-4">
           {/* collapsed bar */}
           <div
             className="flex items-center gap-2 sm:gap-4 min-h-14 py-2 cursor-pointer select-none"
             onClick={() => setIsExpanded(!isExpanded)}
+            aria-label={isExpanded ? "Collapse player" : "Expand player"}
           >
             <span className="relative flex h-1.5 w-1.5 shrink-0">
               <span
@@ -139,7 +139,13 @@ const Player = () => {
             </button>
           </div>
         </div>
-        <div className="border-t border-[#161616]" />
+        <div
+          className={
+            isExpanded
+              ? "border-t border-foreground dark:border-background"
+              : "hidden"
+          }
+        />
         <div className="mx-auto w-full max-w-6xl px-3 sm:px-4">
           {/* expanded panel */}
           <div
@@ -148,11 +154,11 @@ const Player = () => {
           >
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 py-4">
               {/* station logo */}
-              <div className="w-24 h-24 sm:w-36 sm:h-36 rounded-md bg-background border border-[#222] flex items-center justify-center shrink-0">
+              <div className="w-24 h-24 sm:w-36 sm:h-36 rounded-md bg-foreground dark:bg-background border border-background flex items-center justify-center shrink-0">
                 {station.favicon ? (
                   <img
                     src={station.favicon}
-                    alt={station.name}
+                    alt={station.name ? "station.name" : "Radio station logo"}
                     className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
                     onError={(e) => (e.currentTarget.style.display = "none")}
                   />
@@ -195,7 +201,7 @@ const Player = () => {
                     aria-label={isPlaying ? "Pause" : "Play"}
                     onClick={togglePlay}
                     disabled={streamError}
-                    className="w-10 h-10 rounded-md border border-[#222] text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="w-10 h-10 rounded-md border border-muted text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     {isBuffering ? (
                       <Loader2
@@ -212,7 +218,7 @@ const Player = () => {
                     aria-label="Randomise station"
                     onClick={handleRandomise}
                     disabled={isShuffling}
-                    className="w-10 h-10 rounded-md border border-[#222] text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="w-10 h-10 rounded-md border border-muted text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     {isShuffling ? (
                       <Loader2 size={14} className="animate-spin" />

@@ -8,6 +8,7 @@ export function LikedStationsLink() {
         <Link
           href="/my-stations"
           className="flex items-center h-10 md:px-4 rounded-md hover:bg-muted/10"
+          aria-label="My stations page"
         >
           My Stations
         </Link>
@@ -15,7 +16,10 @@ export function LikedStationsLink() {
 
       <Show when="signed-out">
         <SignInButton mode="modal">
-          <button className="cursor-pointer h-10 md:px-4 rounded-md hover:bg-muted/10">
+          <button
+            className="cursor-pointer h-10 md:px-4 rounded-md hover:bg-muted/10"
+            aria-label="My stations page"
+          >
             My Stations
           </button>
         </SignInButton>

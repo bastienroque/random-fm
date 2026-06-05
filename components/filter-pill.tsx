@@ -21,6 +21,7 @@ export function FilterPill({
       onClick={onClick}
       disabled={disabled}
       aria-pressed={active}
+      aria-label={label}
       className={cn(
         "rounded-md border px-3.5 py-1.5 text-sm transition-all duration-150 select-none",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",

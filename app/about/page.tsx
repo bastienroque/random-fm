@@ -36,6 +36,7 @@ const About = () => {
             href="https://www.radio-browser.info/"
             target="_blank"
             className="font-semibold hover:text-white dark:hover:text-background"
+            aria-label="Link to Radio Browser API page"
           >
             Radio Browser API
           </Link>
@@ -46,6 +47,7 @@ const About = () => {
             href="https://github.com/bastienroque"
             target="_blank"
             className="font-semibold hover:text-white dark:hover:text-background"
+            aria-label="Link to developer's GitHub page"
           >
             Bastien Roque
           </Link>
