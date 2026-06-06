@@ -1,7 +1,6 @@
 import { FiltersSection } from "@/components/filters";
 import { RandomiseButton } from "@/components/randomise-button";
 import { currentUser } from "@clerk/nextjs/server";
-import Link from "next/link";
 
 const HomePage = async () => {
   const user = await currentUser();

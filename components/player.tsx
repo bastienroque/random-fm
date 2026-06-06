@@ -100,8 +100,8 @@ const Player = () => {
           setIsPlaying(false);
         }}
       />
-      <div className="fixed bottom-2 left-2 right-2 z-50 bg-background dark:bg-foreground border-t border rounded-md">
-        <div className="mx-auto w-full max-w-6xl px-3 sm:px-4">
+      <div className="fixed bottom-2 left-1/2 -translate-x-1/2 w-[calc(100%-1rem)] max-w-6xl z-50  bg-background dark:bg-foreground border-t border rounded-md">
+        <div className="mx-auto w-full max-w-6xl px-2 sm:px-4">
           {/* collapsed bar */}
           <div
             className="flex items-center gap-2 sm:gap-4 min-h-14 py-2 cursor-pointer select-none"

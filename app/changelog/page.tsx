@@ -49,6 +49,16 @@ const Changelog = () => {
 - Add Aria-labels`}
         </p>
       </div>
+      <div>
+        <h3 className="font-mono">v2.2.2</h3>
+        <span className="font-semibold">More Fixes and Updates</span>
+        <p className="whitespace-pre-line">
+          {`- Navbar: Add Tune-In button
+          - Update player width responsiveness
+- Add Sign Out icon and fix its layout
+- Add GA4 tracking script`}
+        </p>
+      </div>
     </div>
   );
 };

@@ -7,8 +7,10 @@ import { LikedStationsLink } from "./liked-stations-link";
 import { Show, SignInButton, SignOutButton, SignUpButton } from "@clerk/nextjs";
 import { ThemeToggle } from "./theme-toggle";
 import Logo from "./logo";
+import { LogOut } from "lucide-react";
 
 const links = [
+  { label: "Tune-In", href: "/" },
   { label: "About", href: "/about" },
   { label: "Changelog", href: "/changelog" },
 ];
@@ -33,8 +35,8 @@ export default function Navbar() {
             </span>
           </div>
         </Link>
-        <div className="flex gap-4 font-medium">
-          <div className="hidden md:flex items-center gap-2">
+        <div className="flex gap-2 font-medium">
+          <div className="hidden md:flex items-center gap-1">
             {links.map((l) => (
               <Link
                 key={l.href}
@@ -70,8 +72,9 @@ export default function Navbar() {
               <SignOutButton>
                 <button
                   aria-label="Sign out button"
-                  className="border rounded-md h-10 px-8 cursor-pointer hover:opacity-70"
+                  className="flex  items-center  gap-2 rounded-md dark:bg-foreground bg-background dark:text-background text-foreground font-medium text-sm sm:text-base h-10 px-6 cursor-pointer hover:opacity-70"
                 >
+                  <LogOut size={16} />
                   Sign Out
                 </button>
               </SignOutButton>
@@ -154,9 +157,9 @@ export default function Navbar() {
                 <SignOutButton>
                   <button
                     aria-label="Sign out button"
-                    className="rounded-md dark:bg-foreground bg-background dark:text-background text-foreground font-medium text-sm sm:text-base h-10 px-4 cursor-pointer hover:opacity-70"
+                    className="flex  items-center  gap-1 rounded-md dark:bg-foreground bg-background dark:text-background text-foreground font-medium text-sm sm:text-base h-10 px-6 cursor-pointer hover:opacity-70"
                   >
-                    Sign Out
+                    <LogOut size={14} /> Sign Out
                   </button>
                 </SignOutButton>
               </Show>
