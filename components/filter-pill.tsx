@@ -6,20 +6,13 @@ interface FilterPillProps {
   label: string;
   active: boolean;
   onClick: () => void;
-  disabled?: boolean;
 }
 
-export function FilterPill({
-  label,
-  active,
-  onClick,
-  disabled = false,
-}: FilterPillProps) {
+export function FilterPill({ label, active, onClick }: FilterPillProps) {
   return (
     <button
       type="button"
       onClick={onClick}
-      disabled={disabled}
       aria-pressed={active}
       aria-label={label}
       className={cn(
@@ -28,7 +21,6 @@ export function FilterPill({
         active
           ? "border-foreground bg-foreground text-background dark:border-background dark:bg-background dark:text-foreground"
           : "border-border  bg-background dark:bg-foreground text-muted hover:border-foreground/40 hover:text-foreground dark:border-background/40 dark:hover:border-background dark:hover:text-background",
-        disabled && "cursor-not-allowed opacity-40",
       )}
     >
       {label}

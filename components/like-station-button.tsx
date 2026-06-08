@@ -30,14 +30,14 @@ export function LikeStationButton({ station }: Props) {
     <>
       <Show when="signed-in">
         <button
-          aria-label="Randomise station"
+          aria-label="Like station"
           onClick={handleFavorite}
-          className="w-10 h-10 rounded-md border border-muted text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="w-10 h-10 rounded-md border border-muted text-muted flex items-center justify-center dark:hover:text-background dark:hover:border-background hover:text-foreground hover:border-foreground transition-colors shrink-0"
         >
           {favorited ? (
             <HeartMinus
               size={16}
-              className="text-white dark:text-black hover:text-[#ccc] "
+              className="dark:text-background text-foreground"
             />
           ) : (
             <HeartPlus size={16} />
@@ -50,7 +50,7 @@ export function LikeStationButton({ station }: Props) {
           <button
             aria-label="Like station"
             onClick={handleFavorite}
-            className="w-10 h-10 rounded-md border border-muted text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="w-10 h-10 rounded-md border border-muted text-muted flex items-center justify-center hover:text-background hover:border-background dark:hover:text-foreground dark:hover:border-foreground transition-colors shrink-0"
           >
             <HeartPlus size={16} />
           </button>

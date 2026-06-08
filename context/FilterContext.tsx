@@ -1,5 +1,6 @@
 "use client";
 
+import type { Station } from "@/types/station";
 import {
   createContext,
   useContext,
@@ -7,21 +8,22 @@ import {
   useCallback,
   useState,
   type ReactNode,
+  useRef,
 } from "react";
-import type { FilterState, Genre, Language, Country } from "@/types/filter";
-import type { Station } from "@/types/station";
+import type {
+  FilterState,
+  FilterAction,
+  FilterContextValue,
+  Genre,
+  Language,
+  Country,
+} from "@/types/filter";
 
 const DEFAULT_STATE: FilterState = {
   genres: ["Any"],
   language: "Any",
   country: "Any",
 };
-
-type FilterAction =
-  | { type: "TOGGLE_GENRE"; payload: Genre }
-  | { type: "SET_LANGUAGE"; payload: Language }
-  | { type: "SET_COUNTRY"; payload: Country }
-  | { type: "RESET" };
 
 function filterReducer(state: FilterState, action: FilterAction): FilterState {
   switch (action.type) {
@@ -62,23 +64,6 @@ function filterReducer(state: FilterState, action: FilterAction): FilterState {
   }
 }
 
-interface FilterContextValue {
-  filters: FilterState;
-  toggleGenre: (genre: Genre) => void;
-  setLanguage: (language: Language) => void;
-  setCountry: (country: Country) => void;
-  reset: () => void;
-  isActive: boolean;
-  isBuffering: boolean;
-  isPlaying: boolean;
-  streamError: boolean;
-  station: Station | null;
-  setStation: (station: Station | null) => void;
-  setIsPlaying: (value: boolean) => void;
-  setIsBuffering: (value: boolean) => void;
-  setStreamError: (value: boolean) => void;
-}
-
 const FilterContext = createContext<FilterContextValue | null>(null);
 
 export function FilterProvider({ children }: { children: ReactNode }) {
@@ -108,6 +93,16 @@ export function FilterProvider({ children }: { children: ReactNode }) {
     filters.language !== "Any" ||
     filters.country !== "Any";
 
+  const togglePlayRef = useRef<() => void>(() => {});
+
+  const registerTogglePlay = useCallback((fn: () => void) => {
+    togglePlayRef.current = fn;
+  }, []);
+
+  const togglePlay = useCallback(() => {
+    togglePlayRef.current();
+  }, []);
+
   return (
     <FilterContext.Provider
       value={{
@@ -125,6 +120,8 @@ export function FilterProvider({ children }: { children: ReactNode }) {
         setStreamError,
         setIsBuffering,
         setIsPlaying,
+        registerTogglePlay,
+        togglePlay,
       }}
     >
       {children}

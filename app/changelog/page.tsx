@@ -28,7 +28,7 @@ const Changelog = () => {
         </p>
       </div>
       <div>
-        <h3 className="font-mono">v2.1.1</h3>
+        <h3 className="font-mono">v2.1.0</h3>
         <span className="font-semibold">Fixes and Updates</span>
         <p className="whitespace-pre-line">
           {`- Add theme toggle (dark/light)
@@ -39,7 +39,7 @@ const Changelog = () => {
         </p>
       </div>
       <div>
-        <h3 className="font-mono">v2.1.2</h3>
+        <h3 className="font-mono">v2.1.1</h3>
         <span className="font-semibold">More Fixes and Updates</span>
         <p className="whitespace-pre-line">
           {`- Update security standards
@@ -50,13 +50,23 @@ const Changelog = () => {
         </p>
       </div>
       <div>
-        <h3 className="font-mono">v2.2.2</h3>
+        <h3 className="font-mono">v2.2.0</h3>
         <span className="font-semibold">More Fixes and Updates</span>
         <p className="whitespace-pre-line">
           {`- Navbar: Add Tune-In button
           - Update player width responsiveness
 - Add Sign Out icon and fix its layout
 - Add GA4 tracking script`}
+        </p>
+      </div>
+      <div>
+        <h3 className="font-mono">v2.3.0</h3>
+        <span className="font-semibold">More Fixes and Updates</span>
+        <p className="whitespace-pre-line">
+          {`- Fix long station loading
+          - Add pagination to liked stations
+- Add 404 page
+- Upgrade play button to component`}
         </p>
       </div>
     </div>

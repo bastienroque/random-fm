@@ -1,3 +1,5 @@
+import type { Station } from "@/types/station";
+
 export type Genre =
   | "Any"
   | "Jazz"
@@ -34,6 +36,12 @@ export type Country =
   | "Spain"
   | "Italy";
 
+export type FilterAction =
+  | { type: "TOGGLE_GENRE"; payload: Genre }
+  | { type: "SET_LANGUAGE"; payload: Language }
+  | { type: "SET_COUNTRY"; payload: Country }
+  | { type: "RESET" };
+
 export interface FilterState {
   genres: [Genre] | [Genre, Genre]; // 1 or 2 genres max
   language: Language;
@@ -43,6 +51,25 @@ export interface FilterState {
 export interface FilterOption<T extends string> {
   label: string;
   value: T;
+}
+
+export interface FilterContextValue {
+  filters: FilterState;
+  toggleGenre: (genre: Genre) => void;
+  setLanguage: (language: Language) => void;
+  setCountry: (country: Country) => void;
+  reset: () => void;
+  isActive: boolean;
+  isBuffering: boolean;
+  isPlaying: boolean;
+  streamError: boolean;
+  station: Station | null;
+  setStation: (station: Station | null) => void;
+  setIsPlaying: (value: boolean) => void;
+  setIsBuffering: (value: boolean) => void;
+  setStreamError: (value: boolean) => void;
+  registerTogglePlay: (fn: () => void) => void;
+  togglePlay: () => void;
 }
 
 export type FilterKey = keyof FilterState;
