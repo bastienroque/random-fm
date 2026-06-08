@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Show, SignInButton, SignOutButton, SignUpButton } from "@clerk/nextjs";
 
 import { LikedStationsLink } from "./liked-stations-link";
-import { Show, SignInButton, SignOutButton, SignUpButton } from "@clerk/nextjs";
 import { ThemeToggle } from "./theme-toggle";
-import Logo from "./logo";
 import { LogOut } from "lucide-react";
+import Logo from "./logo";
 
 const links = [
   { label: "Tune-In", href: "/" },
@@ -18,22 +18,26 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
+  const closeMenu = () => {
+    setOpen(false);
+  };
+
   return (
     <nav className="w-full p-2">
-      <div className="h-16 mx-auto flex w-full max-w-6xl justify-between px-4 rounded-md dark:bg-background bg-foreground dark:text-foreground text-background">
+      <div className="h-16 mx-auto flex items-center w-full max-w-6xl justify-between px-4 rounded-md dark:bg-background bg-foreground dark:text-foreground text-background">
         <Link
           aria-label="home page"
           href="/"
-          className="flex items-center gap-4 text-xl font-bold tracking-wide"
-          onClick={() => setOpen(false)}
+          className="flex items-baseline gap-3 text-xl font-bold tracking-wide"
+          onClick={closeMenu}
         >
           <Logo className="h-6 w-auto invert dark:invert-0" />
-          <div className="relative">
+          <span className="relative leading-none">
             RandomFM{" "}
             <span className="absolute -top-2 -right-5 font-mono text-[11px] font-normal text-muted-foreground">
               v2
             </span>
-          </div>
+          </span>
         </Link>
         <div className="flex gap-2 font-medium">
           <div className="hidden md:flex items-center gap-1">
@@ -47,7 +51,7 @@ export default function Navbar() {
                 {l.label}
               </Link>
             ))}
-            <LikedStationsLink />
+            <LikedStationsLink handleClick={closeMenu} />
           </div>
           <div className="hidden md:flex items-center gap-2">
             <Show when="signed-out">
@@ -123,14 +127,14 @@ export default function Navbar() {
               <Link
                 key={l.href}
                 href={l.href}
-                onClick={() => setOpen(false)}
+                onClick={closeMenu}
                 aria-label={`${l.href} page`}
                 className="flex items-center h-10 rounded-md hover:bg-muted/10"
               >
                 {l.label}
               </Link>
             ))}
-            <LikedStationsLink />
+            <LikedStationsLink handleClick={closeMenu} />
           </div>
           <div className="my-2 h-px " />
           <div className="mx-auto w-full flex justify-between ">

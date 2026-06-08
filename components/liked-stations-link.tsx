@@ -1,7 +1,12 @@
+import type { MouseEventHandler } from "react";
 import { Show, SignInButton } from "@clerk/nextjs";
 import Link from "next/link";
 
-export function LikedStationsLink() {
+type Props = {
+  handleClick?: MouseEventHandler<HTMLAnchorElement | HTMLButtonElement>;
+};
+
+export function LikedStationsLink({ handleClick }: Props) {
   return (
     <>
       <Show when="signed-in">
@@ -9,6 +14,7 @@ export function LikedStationsLink() {
           href="/my-stations"
           className="flex items-center h-10 md:px-4 rounded-md hover:bg-muted/10"
           aria-label="My stations page"
+          onClick={handleClick}
         >
           My Stations
         </Link>
@@ -19,6 +25,7 @@ export function LikedStationsLink() {
           <button
             className="cursor-pointer h-10 md:px-4 rounded-md hover:bg-muted/10"
             aria-label="My stations page"
+            onClick={handleClick}
           >
             My Stations
           </button>

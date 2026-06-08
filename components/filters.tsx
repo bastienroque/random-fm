@@ -66,16 +66,11 @@ export function FiltersSection() {
               value === "Any"
                 ? filters.genres[0] === "Any"
                 : filters.genres.includes(value);
-            const disabled =
-              value !== "Any" &&
-              atGenreLimit &&
-              !filters.genres.includes(value);
             return (
               <FilterPill
                 key={value}
                 label={label}
                 active={active}
-                disabled={disabled}
                 onClick={() => toggleGenre(value)}
               />
             );
@@ -99,11 +94,6 @@ export function FiltersSection() {
               key={value}
               label={label}
               active={filters.language === value}
-              disabled={
-                value !== "Any" &&
-                filters.language !== "Any" &&
-                filters.language !== value
-              }
               onClick={() =>
                 setLanguage(filters.language === value ? "Any" : value)
               }
@@ -128,11 +118,6 @@ export function FiltersSection() {
               key={value}
               label={label}
               active={filters.country === value}
-              disabled={
-                value !== "Any" &&
-                filters.country !== "Any" &&
-                filters.country !== value
-              }
               onClick={() =>
                 setCountry(filters.country === value ? "Any" : value)
               }

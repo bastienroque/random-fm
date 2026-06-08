@@ -1,9 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
-  Play,
-  Pause,
   Shuffle,
   Volume1,
   Volume2,
@@ -14,6 +12,7 @@ import {
 import { fetchRandomStation } from "@/lib/radio-browser";
 import { useFilters } from "@/context/FilterContext";
 import { LikeStationButton } from "./like-station-button";
+import PlayButton from "./play-button";
 
 const Player = () => {
   const {
@@ -21,11 +20,11 @@ const Player = () => {
     setStation,
     filters: activeFilters,
     isPlaying,
-    isBuffering,
     streamError,
     setStreamError,
     setIsBuffering,
     setIsPlaying,
+    registerTogglePlay,
   } = useFilters();
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isShuffling, setIsShuffling] = useState(false);
@@ -40,15 +39,14 @@ const Player = () => {
     setStreamError(false);
     setIsBuffering(true);
     audio.src = station.url_resolved;
-
-    if (isPlaying) {
-      audio.play().catch(() => setStreamError(true));
-    }
+    audio.load(); // add this
+    audio.play().catch(() => {
+      setStreamError(true);
+      setIsBuffering(false);
+    });
   }, [station?.url_resolved]);
 
-  if (!station) return null;
-
-  const togglePlay = () => {
+  const togglePlay = useCallback(() => {
     const audio = audioRef.current;
     if (!audio || streamError) return;
     if (isPlaying) {
@@ -61,7 +59,13 @@ const Player = () => {
         setIsBuffering(false);
       });
     }
-  };
+  }, [isPlaying, streamError]);
+
+  useEffect(() => {
+    registerTogglePlay(togglePlay);
+  }, [togglePlay]);
+
+  if (!station) return null;
 
   const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = Number(e.target.value);
@@ -168,7 +172,7 @@ const Player = () => {
               </div>
               <div className="flex flex-col gap-3 flex-1 min-w-0">
                 <div>
-                  <p className="tracking-widest text-muted mb-0.5">
+                  <p className="tracking-widest text-muted mb-0.5 line-clamp-2">
                     {station.name}
                     {station.homepage ? (
                       <>
@@ -186,7 +190,7 @@ const Player = () => {
                     ) : null}
                   </p>
                   {tags.length > 0 && (
-                    <p className="text-muted font-mono truncate">
+                    <p className="text-muted font-mono truncate whitespace-break-spaces">
                       {tags.map((t) => t.trim()).join(" · ")}
                     </p>
                   )}
@@ -196,24 +200,8 @@ const Player = () => {
                     </p>
                   )}
                 </div>
-                <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full">
-                  <button
-                    aria-label={isPlaying ? "Pause" : "Play"}
-                    onClick={togglePlay}
-                    disabled={streamError}
-                    className="w-10 h-10 rounded-md border border-muted text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
-                  >
-                    {isBuffering ? (
-                      <Loader2
-                        size={16}
-                        className="rounded-full animate-spin"
-                      />
-                    ) : isPlaying ? (
-                      <Pause size={16} />
-                    ) : (
-                      <Play size={16} />
-                    )}
-                  </button>
+                <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+                  <PlayButton station={station} />
                   <button
                     aria-label="Randomise station"
                     onClick={handleRandomise}
@@ -227,7 +215,7 @@ const Player = () => {
                     )}
                   </button>
                   <LikeStationButton station={station} />
-                  <div className="flex items-center gap-3 w-full sm:w-1/3 md:w-1/4 min-w-0">
+                  <div className="flex items-center gap-1 sm:gap-3 w-full sm:w-1/3 md:w-1/4 min-w-0">
                     <button
                       type="button"
                       onClick={() => {

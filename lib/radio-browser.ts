@@ -6,7 +6,7 @@ const API_BASE = "https://de1.api.radio-browser.info/json";
 
 function buildParams(filters: FilterState): URLSearchParams {
   const params = new URLSearchParams({
-    limit: "10",
+    limit: "15",
     order: "random",
     hidebroken: "true",
     has_geo_info: "false",

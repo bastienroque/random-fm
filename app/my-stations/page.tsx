@@ -1,5 +1,7 @@
 import LikedStationsGrid from "@/components/liked-stations-grid";
 
+export const dynamic = "force-dynamic";
+
 const LikedStations = async () => {
   return (
     <div className="flex flex-col gap-8 items-start pb-24">
