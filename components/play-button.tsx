@@ -29,7 +29,7 @@ const PlayButton = ({ station }: Props) => {
     <button
       aria-label={isCurrentStation && isPlaying ? "Pause" : "Play"}
       onClick={handleClick}
-      className="w-10 h-10 rounded-md border border-muted text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
+      className="w-10 h-10 rounded-md border border-muted text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0"
     >
       {isCurrentStation && isBuffering ? (
         <Loader2 size={16} className="animate-spin" />
