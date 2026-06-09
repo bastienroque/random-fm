@@ -11,6 +11,7 @@ Available at: https://random-fm-app.vercel.app/
 
 * 🎶 Live radio streaming from global stations
 * 🔀 Random station shuffle
+* ⏮️ Last station play button
 * 🎚️ Built-in audio player with play/pause & buffering states
 * 🔊 Volume control with quick mute / max interactions
 * 🏷️ Station metadata (country, language, bitrate, tags)
@@ -18,6 +19,7 @@ Available at: https://random-fm-app.vercel.app/
 * 👤 SignUp and SignIn to an account
 * ❤️ Save and like any station
 * 🔒 Protected routes for your privacy
+* 🍞 Toast notifications
 
 ---
 
@@ -104,7 +106,7 @@ The player is fully responsive with:
 
 * ~~Favorites / liked stations~~ ❤️
 * ~~Register / Login~~
-* Recently played history
+~~* Recently played history~~
 * Search + filtering improvements
 * Sleep timer ⏲️
 * Equalizer / audio visualizer
