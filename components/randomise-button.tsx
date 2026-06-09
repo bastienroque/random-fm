@@ -3,9 +3,12 @@
 import { useState } from "react";
 import { useFilters } from "@/context/FilterContext";
 import { fetchRandomStation } from "@/lib/radio-browser";
+import { useLastPlayed } from "@/context/LastPlayedContext";
+import { notify } from "@/lib/notifications";
 
 export function RandomiseButton() {
-  const { filters, isActive, setStation } = useFilters();
+  const { filters, setStation } = useFilters();
+  const { updateLastPlayed } = useLastPlayed();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -16,10 +19,13 @@ export function RandomiseButton() {
     try {
       const station = await fetchRandomStation(filters);
       if (!station) {
-        setError("No stations found for these filters — try changing them.");
+        notify.error(
+          "No stations found for these filters — try changing them.",
+        );
         return;
       }
       setStation(station);
+      updateLastPlayed(station);
     } catch {
       setError("Couldn't reach the radio API. Try again.");
     } finally {
@@ -33,7 +39,7 @@ export function RandomiseButton() {
         type="button"
         onClick={handleClick}
         disabled={loading}
-        className="flex w-full items-center justify-center gap-2 rounded-md bg-foreground text-background dark:bg-background dark:text-foreground px-4 py-3.5 text-sm font-medium transition-opacity hover:opacity-80 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+        className="flex w-full items-center justify-center gap-2 rounded-md bg-foreground text-background dark:bg-background dark:text-foreground px-4 py-3.5 text-sm font-medium transition-opacity hover:opacity-80 active:scale-[0.98] cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
       >
         {loading ? (
           <>

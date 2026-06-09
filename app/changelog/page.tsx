@@ -69,6 +69,16 @@ const Changelog = () => {
 - Upgrade play button to component`}
         </p>
       </div>
+      <div>
+        <h3 className="font-mono">v2.4.0</h3>
+        <span className="font-semibold">More Fixes and Updates</span>
+        <p className="whitespace-pre-line">
+          {`- Improve pagination
+          - Add last played station button when logged-in
+- Add toast notifications
+- Update hover states`}
+        </p>
+      </div>
     </div>
   );
 };

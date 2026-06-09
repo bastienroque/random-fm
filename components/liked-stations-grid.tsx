@@ -16,8 +16,8 @@ const LikedStationsGrid = () => {
   const currentFavorites = favorites.slice(firstStationIndex, lastStationIndex);
 
   return (
-    <div className="flex flex-col items-center gap-8">
-      <div className="flex flex-col md:grid md:grid-cols-2 gap-4">
+    <div className="flex flex-col w-full items-center gap-8">
+      <div className="flex flex-col w-full md:grid md:grid-cols-2 gap-4">
         {currentFavorites.map((favorite) => (
           <LikedStationItem key={favorite.stationuuid} favorite={favorite} />
         ))}

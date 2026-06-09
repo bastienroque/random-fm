@@ -13,6 +13,9 @@ import { fetchRandomStation } from "@/lib/radio-browser";
 import { useFilters } from "@/context/FilterContext";
 import { LikeStationButton } from "./like-station-button";
 import PlayButton from "./play-button";
+import { useLastPlayed } from "@/context/LastPlayedContext";
+import Link from "next/link";
+import { notify } from "@/lib/notifications";
 
 const Player = () => {
   const {
@@ -26,12 +29,12 @@ const Player = () => {
     setIsPlaying,
     registerTogglePlay,
   } = useFilters();
+  const { updateLastPlayed } = useLastPlayed();
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isShuffling, setIsShuffling] = useState(false);
   const [volume, setVolume] = useState(50);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // Reload audio whenever the station changes
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio || !station) return;
@@ -39,11 +42,20 @@ const Player = () => {
     setStreamError(false);
     setIsBuffering(true);
     audio.src = station.url_resolved;
-    audio.load(); // add this
-    audio.play().catch(() => {
-      setStreamError(true);
-      setIsBuffering(false);
-    });
+    audio.load();
+
+    notify.promise(
+      new Promise<void>((resolve, reject) => {
+        audio.oncanplay = () => resolve();
+        audio.onerror = () => reject();
+        audio.play().catch(reject);
+      }),
+      {
+        loading: `Loading station...`,
+        success: `Now playing: ${station.name}`,
+        error: "Failed to load station",
+      },
+    );
   }, [station?.url_resolved]);
 
   const togglePlay = useCallback(() => {
@@ -77,7 +89,10 @@ const Player = () => {
     setIsShuffling(true);
     try {
       const next = await fetchRandomStation(activeFilters);
-      if (next) setStation(next);
+      if (next) {
+        setStation(next);
+        updateLastPlayed(next);
+      }
     } finally {
       setIsShuffling(false);
     }
@@ -133,7 +148,7 @@ const Player = () => {
             </span>
             <button
               aria-label={isExpanded ? "Collapse player" : "Expand player"}
-              className="text-muted hover:text-[#666] transition-colors ml-auto shrink-0"
+              className="text-muted hover:text-foreground dark:hover:text-background transition-colors ml-auto shrink-0"
               onClick={(e) => {
                 e.stopPropagation();
                 setIsExpanded(!isExpanded);
@@ -177,7 +192,7 @@ const Player = () => {
                     {station.homepage ? (
                       <>
                         {" · "}
-                        <a
+                        <Link
                           href={station.homepage}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -185,7 +200,7 @@ const Player = () => {
                           onClick={(e) => e.stopPropagation()}
                         >
                           website ↗
-                        </a>
+                        </Link>
                       </>
                     ) : null}
                   </p>
@@ -206,7 +221,7 @@ const Player = () => {
                     aria-label="Randomise station"
                     onClick={handleRandomise}
                     disabled={isShuffling}
-                    className="w-10 h-10 rounded-md border border-muted text-muted flex items-center justify-center hover:text-[#ccc] transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="w-10 h-10 rounded-md border border-muted text-muted flex items-center justify-center hover:border-foreground dark:hover:border-background hover:text-foreground dark:hover:text-background transition-colors shrink-0 disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     {isShuffling ? (
                       <Loader2 size={14} className="animate-spin" />
@@ -222,7 +237,7 @@ const Player = () => {
                         setVolume(0);
                         if (audioRef.current) audioRef.current.volume = 0;
                       }}
-                      className="text-muted hover:text-white dark:hover:text-black transition-colors shrink-0"
+                      className="text-muted hover:text-foreground dark:hover:text-background transition-colors shrink-0"
                       aria-label="Mute volume"
                     >
                       <Volume1 size={14} />
@@ -255,7 +270,7 @@ const Player = () => {
                         setVolume(100);
                         if (audioRef.current) audioRef.current.volume = 1;
                       }}
-                      className="text-muted hover:text-white dark:hover:text-black transition-colors shrink-0"
+                      className="text-muted hover:text-foreground dark:hover:text-background transition-colors shrink-0"
                       aria-label="Max volume"
                     >
                       <Volume2 size={14} />

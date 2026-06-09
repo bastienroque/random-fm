@@ -30,12 +30,10 @@ function filterReducer(state: FilterState, action: FilterAction): FilterState {
     case "TOGGLE_GENRE": {
       const genre = action.payload;
 
-      // Selecting "Any" resets genres
       if (genre === "Any") return { ...state, genres: ["Any"] };
 
       const current = state.genres.filter((g) => g !== "Any") as Genre[];
 
-      // Deselect if already selected
       if (current.includes(genre)) {
         const next = current.filter((g) => g !== genre) as Genre[];
         return {
@@ -45,7 +43,6 @@ function filterReducer(state: FilterState, action: FilterAction): FilterState {
         };
       }
 
-      // Enforce max 2 — drop the oldest and add new
       const next = [...current, genre].slice(-2) as [Genre] | [Genre, Genre];
       return { ...state, genres: next };
     }

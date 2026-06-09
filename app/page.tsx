@@ -1,5 +1,6 @@
+import ButtonsWrapper from "@/components/buttonsWrapper";
 import { FiltersSection } from "@/components/filters";
-import { RandomiseButton } from "@/components/randomise-button";
+
 import { currentUser } from "@clerk/nextjs/server";
 
 const HomePage = async () => {
@@ -25,7 +26,7 @@ const HomePage = async () => {
         </p>
       </div>
       <FiltersSection />
-      <RandomiseButton />
+      <ButtonsWrapper />
     </div>
   );
 };
