@@ -9,6 +9,8 @@ import { FilterProvider } from "@/context/FilterContext";
 import { FavoritesProvider } from "@/context/FavoritesContext";
 import Player from "@/components/player";
 import Navbar from "@/components/navbar";
+import { LastPlayedProvider } from "@/context/LastPlayedContext";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,14 +43,22 @@ export default function RootLayout({
           <ClerkProvider>
             <FavoritesProvider>
               <FilterProvider>
-                <header className="flex">
-                  <Navbar />
-                </header>
-                <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-8">
-                  {children}
-                  <GoogleAnalytics gaId="G-XD59YH994H" />
-                </main>
-                <Player />
+                <LastPlayedProvider>
+                  <header className="flex">
+                    <Navbar />
+                  </header>
+                  <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-8">
+                    {children}
+                    <GoogleAnalytics gaId="G-XD59YH994H" />
+                  </main>
+                  <Player />
+                  <Toaster
+                    position="bottom-center"
+                    visibleToasts={3}
+                    className="dark:invert"
+                    duration={4000}
+                  />
+                </LastPlayedProvider>
               </FilterProvider>
             </FavoritesProvider>
           </ClerkProvider>

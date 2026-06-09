@@ -1,7 +1,10 @@
+"use client";
+
 import { useFavorites } from "@/context/FavoritesContext";
 import { Show, SignInButton } from "@clerk/nextjs";
 import { HeartMinus, HeartPlus } from "lucide-react";
 import type { Station } from "@/types/station";
+import { notify } from "@/lib/notifications";
 
 type Props = {
   station: Station;

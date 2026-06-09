@@ -10,6 +10,7 @@ import {
 } from "react";
 import { useUser } from "@clerk/nextjs";
 import type { Favorite } from "@/lib/generated/prisma/client";
+import { notify } from "@/lib/notifications";
 
 interface FavoritesContextValue {
   favorites: Favorite[];
@@ -46,25 +47,41 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
       name: string;
       favicon?: string;
     }) => {
-      const response = await fetch("/api/favorites", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(station),
-      });
-      if (response.ok) {
-        const { newFavorite } = await response.json();
-        setFavorites((prev) => [...prev, newFavorite]);
+      try {
+        const response = await fetch("/api/favorites", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(station),
+        });
+        if (response.ok) {
+          const { newFavorite } = await response.json();
+          setFavorites((prev) => [...prev, newFavorite]);
+          notify.success("Added to your liked stations");
+        } else {
+          notify.error("Failed to add station");
+        }
+      } catch {
+        notify.error("Failed to add station");
       }
     },
     [],
   );
 
   const removeFavorite = useCallback(async (stationuuid: string) => {
-    const response = await fetch(`/api/favorites/${stationuuid}`, {
-      method: "DELETE",
-    });
-    if (response.ok) {
-      setFavorites((prev) => prev.filter((f) => f.stationuuid !== stationuuid));
+    try {
+      const response = await fetch(`/api/favorites/${stationuuid}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        setFavorites((prev) =>
+          prev.filter((f) => f.stationuuid !== stationuuid),
+        );
+        notify.success("Removed from your liked stations");
+      } else {
+        notify.error("Failed to remove station");
+      }
+    } catch {
+      notify.error("Failed to remove station");
     }
   }, []);
 

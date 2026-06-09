@@ -28,6 +28,17 @@ const About = () => {
           Station data is sourced entirely from the Radio Browser open API — a community-maintained, free database of radio stations from every corner of the planet.`}
         </p>
       </div>
+      <div>
+        <h1 className="text-2xl font-semibold tracking-tight">
+          Future improvements{" "}
+        </h1>
+        <p className="whitespace-pre-line">
+          {`- Search bar + filtering improvements
+- Sleep timer
+- Audio visualizer
+- Custom lists for liked stations`}
+        </p>
+      </div>
 
       <footer>
         <p className="text-muted">
@@ -35,7 +46,7 @@ const About = () => {
           <Link
             href="https://www.radio-browser.info/"
             target="_blank"
-            className="font-semibold hover:text-white dark:hover:text-background"
+            className="font-semibold hover:text-foreground dark:hover:text-background"
             aria-label="Link to Radio Browser API page"
           >
             Radio Browser API
@@ -46,7 +57,7 @@ const About = () => {
           <Link
             href="https://github.com/bastienroque"
             target="_blank"
-            className="font-semibold hover:text-white dark:hover:text-background"
+            className="font-semibold hover:text-foreground dark:hover:text-background"
             aria-label="Link to developer's GitHub page"
           >
             Bastien Roque

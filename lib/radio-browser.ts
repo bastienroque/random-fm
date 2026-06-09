@@ -72,3 +72,19 @@ export async function fetchStationByUuid(
     return null;
   }
 }
+
+export async function fetchLastPlayedStation(
+  stationuuid: string,
+): Promise<Station | null> {
+  try {
+    const res = await fetch(`${API_BASE}/stations/byuuid/${stationuuid}`, {
+      headers: { "User-Agent": "random-fm/1.0" },
+      next: { revalidate: 0 },
+    });
+    const data = await res.json();
+    return data[0] ?? null;
+  } catch (error) {
+    console.error("Last played station isn't available anymore", error);
+    return null;
+  }
+}
