@@ -1,19 +1,17 @@
 "use client";
 
-import Link from "next/link";
 import { LastPlayedStationButton } from "./last-played-station-button";
 import { RandomiseButton } from "./randomise-button";
-import { Show, SignInButton } from "@clerk/nextjs";
-import { MouseEventHandler } from "react";
+import { ResetFiltersButton } from "./reset-filters-button";
+import { Show } from "@clerk/nextjs";
 
-type Props = {
-  handleClick?: MouseEventHandler<HTMLAnchorElement | HTMLButtonElement>;
-};
-
-const ButtonsWrapper = ({ handleClick }: Props) => {
+const ButtonsWrapper = () => {
   return (
-    <div className="flex flex-col gap-4">
-      <RandomiseButton />
+    <div className="flex w-full md:w-auto flex-col gap-4">
+      <div className="flex flex-col md:flex-row gap-2">
+        <RandomiseButton />
+        <ResetFiltersButton />
+      </div>
       <Show when="signed-in">
         <p>Or alternatively,</p>
         <LastPlayedStationButton />

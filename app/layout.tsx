@@ -25,6 +25,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "RandomFM",
   description: "A radio that won't play what you expect",
+  manifest: "/manifest.json",
+  icons: {
+    icon: [
+      { url: "/icon.svg" },
+      { url: "/icon-192x192.svg", sizes: "192x192", type: "image/svg+xml" },
+      { url: "/icon-512x512.svg", sizes: "512x512", type: "image/svg+xml" },
+    ],
+  },
 };
 
 export default function RootLayout({
