@@ -28,7 +28,7 @@ export function LastPlayedStationButton() {
         type="button"
         onClick={handleClick}
         disabled={loading || !lastPlayed}
-        className="flex w-full items-center justify-center gap-2 rounded-md bg-foreground text-background dark:bg-background dark:text-foreground px-4 py-3.5 text-sm font-medium transition-opacity hover:opacity-80 active:scale-[0.98] cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+        className="flex items-center justify-center gap-2 w-full md:w-auto rounded-md bg-foreground text-background dark:bg-background dark:text-foreground px-4 py-3.5 text-sm font-medium transition-opacity hover:opacity-80 active:scale-[0.98] cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
       >
         {loading ? (
           <>

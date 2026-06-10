@@ -53,7 +53,8 @@ const Player = () => {
       {
         loading: `Loading station...`,
         success: `Now playing: ${station.name}`,
-        error: "Failed to load station",
+        error:
+          "Failed to load station, please Shuffle or hit the Randomise button again",
       },
     );
   }, [station?.url_resolved]);
@@ -204,14 +205,19 @@ const Player = () => {
                       </>
                     ) : null}
                   </p>
-                  {tags.length > 0 && (
-                    <p className="text-muted font-mono truncate whitespace-break-spaces">
+                  {tags.length > 0 ? (
+                    <p className="text-muted font-mono whitespace-break-spaces">
                       {tags.map((t) => t.trim()).join(" · ")}
+                    </p>
+                  ) : (
+                    <p className="text-muted font-mono line-through whitespace-break-spaces">
+                      tags unavailable
                     </p>
                   )}
                   {streamError && (
                     <p className="text-red-400 text-xs mt-1">
-                      Stream unavailable — try shuffling to another station.
+                      Station unavailable — try shuffling to another station or
+                      use the randomise button again.
                     </p>
                   )}
                 </div>

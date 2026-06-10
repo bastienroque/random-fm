@@ -51,9 +51,8 @@ export function LikeStationButton({ station }: Props) {
       <Show when="signed-out">
         <SignInButton mode="modal">
           <button
-            aria-label="Like station"
-            onClick={handleFavorite}
-            className="w-10 h-10 rounded-md border border-muted text-muted flex items-center justify-center hover:text-background hover:border-background dark:hover:text-foreground dark:hover:border-foreground transition-colors shrink-0"
+            aria-label="Like station - Sign-in required"
+            className="w-10 h-10 rounded-md border border-muted text-muted flex items-center justify-center dark:hover:text-background dark:hover:border-background hover:text-foreground hover:border-foreground transition-colors shrink-0"
           >
             <HeartPlus size={16} />
           </button>

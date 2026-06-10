@@ -43,9 +43,6 @@ export function FiltersSection() {
   const { filters, toggleGenre, setLanguage, setCountry, reset, isActive } =
     useFilters();
 
-  const atGenreLimit =
-    filters.genres[0] !== "Any" && filters.genres.length === 2;
-
   return (
     <section aria-label="Station filters" className="space-y-6">
       {/* Genre — up to 2 */}
@@ -125,17 +122,6 @@ export function FiltersSection() {
           ))}
         </div>
       </div>
-
-      {/* Reset */}
-      {isActive && (
-        <button
-          type="button"
-          onClick={reset}
-          className="text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline transition-colors"
-        >
-          Reset filters
-        </button>
-      )}
     </section>
   );
 }
