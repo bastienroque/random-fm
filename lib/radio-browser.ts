@@ -1,8 +1,8 @@
 import type { FilterState } from "@/types/filter";
 import type { Station } from "@/types/station";
 
-// radio-browser.info provides multiple mirrors — this is the recommended entry point
 const API_BASE = "https://de1.api.radio-browser.info/json";
+const CACHE_TTL = 60 * 60;
 
 function buildParams(filters: FilterState): URLSearchParams {
   const params = new URLSearchParams({
@@ -44,8 +44,8 @@ export async function fetchRandomStation(
 ): Promise<Station | null> {
   const params = buildParams(filters);
   const res = await fetch(`${API_BASE}/stations/search?${params.toString()}`, {
-    headers: { "User-Agent": "RadioApp/1.0" },
-    next: { revalidate: 0 }, // always fresh
+    headers: { "User-Agent": "random-fm/1.0" },
+    next: { revalidate: CACHE_TTL },
   });
 
   if (!res.ok) throw new Error(`radio-browser API error: ${res.status}`);
@@ -63,7 +63,7 @@ export async function fetchStationByUuid(
   try {
     const res = await fetch(`${API_BASE}/stations/byuuid/${stationuuid}`, {
       headers: { "User-Agent": "random-fm/1.0" },
-      next: { revalidate: 0 },
+      next: { revalidate: CACHE_TTL },
     });
     const data = await res.json();
     return data[0] ?? null;

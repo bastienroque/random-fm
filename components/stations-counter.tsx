@@ -38,9 +38,9 @@ const StationsCounter = () => {
   }
 
   return (
-    <p className="pl-2 border rounded-md w-full md:w-auto h-fit flex items-center justify-between gap-2 text-sm">
+    <p className="pl-2 border rounded-md w-full md:w-auto h-fit flex items-center justify-between gap-2 text-sm border-muted text-muted">
       Stations currently available:
-      <span className="font-semibold p-2 dark:bg-background dark:text-foreground bg-foreground text-background rounded-md">
+      <span className="font-semibold p-2 bg-muted text-background dark:text-foreground rounded-sm">
         {stations}
       </span>
     </p>

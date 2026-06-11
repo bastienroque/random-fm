@@ -34,7 +34,8 @@ export type Country =
   | "Brazil"
   | "Germany"
   | "Spain"
-  | "Italy";
+  | "Italy"
+  | "Portugal";
 
 export type FilterAction =
   | { type: "TOGGLE_GENRE"; payload: Genre }
