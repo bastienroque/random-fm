@@ -37,6 +37,7 @@ const COUNTRIES: FilterOption<Country>[] = [
   { label: "🇧🇷 Brazil", value: "Brazil" },
   { label: "🇩🇪 Germany", value: "Germany" },
   { label: "🇪🇸 Spain", value: "Spain" },
+  { label: "🇵🇹 Portugal", value: "Portugal" },
 ];
 
 export function FiltersSection() {

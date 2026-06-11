@@ -28,13 +28,13 @@ export default function Navbar() {
         <Link
           aria-label="home page"
           href="/"
-          className="flex items-baseline gap-3 text-xl font-bold tracking-wide"
+          className="flex items-baseline gap-3 text-xl font-bold tracking-wide active:scale-[0.98]"
           onClick={closeMenu}
         >
           <Logo className="h-6 w-auto invert dark:invert-0" />
-          <span className="relative leading-none">
+          <span className="relative leading-0">
             RandomFM{" "}
-            <span className="absolute -top-2 -right-5 font-mono text-[11px] font-normal text-muted-foreground">
+            <span className="absolute -top-3 -right-5 font-mono text-[11px] font-normal text-muted-foreground">
               v2
             </span>
           </span>
@@ -46,7 +46,7 @@ export default function Navbar() {
                 key={l.href}
                 href={l.href}
                 aria-label={`${l.href} page`}
-                className="flex items-center h-10 px-4 rounded-md hover:bg-muted/10"
+                className="flex items-center h-10 px-4 text-sm rounded-md hover:bg-muted/10 active:scale-[0.95] transition-colors"
               >
                 {l.label}
               </Link>
@@ -58,7 +58,7 @@ export default function Navbar() {
               <SignInButton mode="modal">
                 <button
                   aria-label="Sign in button"
-                  className="rounded-md dark:bg-foreground bg-background dark:text-background text-foreground h-10 px-8 cursor-pointer hover:opacity-70"
+                  className="rounded-md text-sm dark:bg-foreground bg-background dark:text-background text-foreground h-10 px-8 cursor-pointer hover:opacity-70 active:scale-[0.95]"
                 >
                   Sign In
                 </button>
@@ -66,7 +66,7 @@ export default function Navbar() {
               <SignUpButton mode="modal">
                 <button
                   aria-label="Sign up button"
-                  className="border rounded-md h-10 px-8 cursor-pointer hover:opacity-70"
+                  className="border rounded-md text-sm h-10 px-8 cursor-pointer hover:opacity-70 active:scale-[0.95]"
                 >
                   Sign Up
                 </button>
@@ -76,7 +76,7 @@ export default function Navbar() {
               <SignOutButton>
                 <button
                   aria-label="Sign out button"
-                  className="flex  items-center  gap-2 rounded-md dark:bg-foreground bg-background dark:text-background text-foreground font-medium text-sm sm:text-base h-10 px-6 cursor-pointer hover:opacity-70"
+                  className="flex  items-center  gap-2 rounded-md dark:bg-foreground bg-background dark:text-background text-foreground text-sm h-10 px-6 cursor-pointer hover:opacity-70 active:scale-[0.95]"
                 >
                   <LogOut size={16} />
                   Sign Out
@@ -129,7 +129,7 @@ export default function Navbar() {
                 href={l.href}
                 onClick={closeMenu}
                 aria-label={`${l.href} page`}
-                className="flex items-center h-10 rounded-md hover:bg-muted/10"
+                className="flex items-center h-10 text-sm rounded-md hover:bg-muted/10 active:scale-[0.95]"
               >
                 {l.label}
               </Link>
@@ -143,7 +143,7 @@ export default function Navbar() {
                 <SignInButton mode="modal">
                   <button
                     aria-label="Sign in button"
-                    className="rounded-md dark:bg-foreground bg-background dark:text-background text-foreground font-medium text-sm sm:text-base h-10 px-4 cursor-pointer hover:opacity-70"
+                    className="rounded-md dark:bg-foreground bg-background dark:text-background text-foreground font-medium text-sm h-10 px-4 cursor-pointer hover:opacity-70 active:scale-[0.95]"
                   >
                     Sign In
                   </button>
@@ -151,7 +151,7 @@ export default function Navbar() {
                 <SignUpButton mode="modal">
                   <button
                     aria-label="Sign up button"
-                    className="border rounded-md font-medium text-sm sm:text-base h-10 px-4 cursor-pointer hover:opacity-70"
+                    className="border rounded-md font-medium text-sm h-10 px-4 cursor-pointer hover:opacity-70 active:scale-[0.95]"
                   >
                     Sign Up
                   </button>
@@ -161,7 +161,7 @@ export default function Navbar() {
                 <SignOutButton>
                   <button
                     aria-label="Sign out button"
-                    className="flex  items-center  gap-1 rounded-md dark:bg-foreground bg-background dark:text-background text-foreground font-medium text-sm sm:text-base h-10 px-6 cursor-pointer hover:opacity-70"
+                    className="flex  items-center  gap-1 rounded-md dark:bg-foreground bg-background dark:text-background text-foreground font-medium text-sm h-10 px-6 cursor-pointer hover:opacity-70 active:scale-[0.95]"
                   >
                     <LogOut size={14} /> Sign Out
                   </button>

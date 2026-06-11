@@ -24,7 +24,7 @@ const About = () => {
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Built with </h1>
         <p className="whitespace-pre-line">
-          {`RandomFM was built as a full-stack portfolio project using Next.js 15, React, TypeScript, Tailwind CSS, Neon (serverless Postgres), Prisma, and Clerk for authentication.
+          {`RandomFM was built as a full-stack portfolio project using Next.js 15, React, TypeScript, Tailwind CSS, Sonner, Neon (serverless Postgres), Prisma, and Clerk for authentication.
           Station data is sourced entirely from the Radio Browser open API — a community-maintained, free database of radio stations from every corner of the planet.`}
         </p>
       </div>
