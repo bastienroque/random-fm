@@ -32,6 +32,7 @@ function buildParams(filters: FilterState): URLSearchParams {
       Germany: "Germany",
       Spain: "Spain",
       Italy: "Italy",
+      Portugal: "Portugal",
     };
     params.set("country", countryMap[filters.country] ?? filters.country);
   }
